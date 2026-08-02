@@ -62,7 +62,7 @@ const selectAllStatusFilme = async function () {
 
 const selectStatusFilmeById = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_status_filme', id);
+        let sql = criarSql.SELECT('tbl_status_filme', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -78,7 +78,7 @@ const selectStatusFilmeById = async function (id) {
 
 const deleteStatusFilme = async function (id) {
     try {
-        let sql = criarSql.DELETE('tbl_status_filme', id);
+        let sql = criarSql.DELETE('tbl_status_filme', 'id', id);
 
         let result = await knexConection.raw(sql);
 

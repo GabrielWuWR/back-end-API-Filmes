@@ -1,0 +1,5292 @@
+openapi: 3.0.3
+info:
+  title: Super API gerenciadora de filmes
+  description: API para gerenciamento de filmes, contendo controle completo de elenco, equipe técnica, pessoas, premiações e mídias associadas.
+  contact:
+    email: gabriel4321uo@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/v1/senai/locadora
+paths:
+  /idioma/:
+    get:
+      tags:
+        - idiomas
+      summary: Rota usada para obter todos os idiomas.
+      description: Rota usada para obter todos os idiomas.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      idiomas:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Idiomas'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - idiomas
+      summary: Rota usada para inserir um novo idioma.
+      description: Rota usada para inserir um novo idioma.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      idiomas:
+                        $ref: '#/components/schemas/Idiomas'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Idiomas'
+  /idioma/:id:
+    get:
+      tags:
+        - idiomas
+      summary: Rota usada para obter um idioma pelo ID.
+      description: Rota usada para obter um idioma pelo ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do idioma a pesquisar.
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      idiomas:
+                        $ref: '#/components/schemas/Idiomas'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - idiomas
+      summary: Rota usada para atualizar um idioma.
+      description: Rota usada para atualizar um idioma.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      idiomas:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Idiomas'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Idiomas'
+    delete:
+      tags:
+        - idiomas
+      summary: Rota usada para deletar um idioma.
+      description: Rota usada para deletar um idioma.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+  /pessoa/:
+    get:
+      tags:
+        - pessoa
+      summary: Rota usada para obter todos as pessoas.
+      description: Rota usada para obter todos as pessoas.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      pessoa:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pessoa'
+        '404':
+          description: Não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+    post:
+      tags:
+        - pessoa
+      summary: Rota usada para inserir uma nova pessoa.
+      description: Rota usada para inserir uma nova pessoa.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      pessoa:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pessoa'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pessoa'
+  /pessoa/:id:
+    get:
+      tags:
+        - pessoa
+      summary: Rota usada para obter uma pessoa pelo ID.
+      description: Rota usada para obter uma pessoa pelo ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da pessoa a pesquisar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      pessoa:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pessoa'
+    put:
+      tags:
+        - pessoa
+      summary: Rota usada para atualizar uma pessoa.
+      description: Rota usada para atualizar uma pessoa.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da pessoa a atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      pessoa:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Pessoa'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pessoa'
+    delete:
+      tags:
+        - pessoa
+      summary: Rota usada para deletar uma pessoa.
+      description: Rota usada para deletar uma pessoa.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da pessoa a deletar
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /filme/:
+    get:
+      tags:
+        - filme
+      summary: Rota para obter todos os filmes.
+      description: Rota para obter todos os filmes.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Filme'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - filme
+      summary: Rota usada para inserir um novo filme.
+      description: Rota usada para inserir um novo filme.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Filme'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Filme'
+  /filme/:id:
+    get:
+      tags:
+        - filme
+      summary: Rota usada para obter um filme filtrando pelo id.
+      description: Rota usada para obter um filme filtrando pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do filme a pesquisar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Filme'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - filme
+      summary: Rota usada para atualizar um filme.
+      description: Rota usada para atualizar um filme.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do filme a atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Filme'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Filme'
+    delete:
+      tags:
+        - filme
+      summary: Rota usada para apagar um filme.
+      description: Rota usada para apagar um filme.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do filme a apagar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /tipo_atuacao/:
+    get:
+      tags:
+        - tipo_atuacao
+      summary: Rota para obter todos os tipos atuação.
+      description: Rota para obter todos os tipos atuação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      tipo_atuacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/tipo_atuacao'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - tipo_atuacao
+      summary: Rota usada para inserir um tipo de atuação.
+      description: Rota usada para inserir um tipo de atuação.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      tipo_atuacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/tipo_atuacao'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tipo_atuacao'
+  /tipo_atuacao/:id:
+    get:
+      tags:
+        - tipo_atuacao
+      summary: Rota para obter um tipo de atuação pelo id.
+      description: Rota para obter um tipo de atuação pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do tipo de atuação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      tipo_atuacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/tipo_atuacao'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - tipo_atuacao
+      summary: Rota usada para atualizar um tipo de atuação
+      description: Rota usada para atualizar um tipo de atuação
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do tipo de atuação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      tipo_atuacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/tipo_atuacao'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tipo_atuacao'
+    delete:
+      tags:
+        - tipo_atuacao
+      summary: Rota usada para deletar um tipo de atuação.
+      description: Rota usada para deletar um tipo de atuação.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do tipo de atuação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /ocupacoes/:
+    get:
+      tags:
+        - ocupacoes
+      summary: Rota usada para obter todas as ocupações.
+      description: Rota usada para obter todas as ocupações.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      ocupacoes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ocupacoes'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - ocupacoes
+      summary: Rota para inserir uma ocupação.
+      description: Rota para inserir uma ocupação.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da ocupação.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      ocupacoes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ocupacoes'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ocupacoes'
+  /ocupacoes/:id:
+    get:
+      tags:
+        - ocupacoes
+      summary: Rota usada para obter uma ocupação pelo id.
+      description: Rota usada para obter uma ocupação pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da ocupação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      ocupacoes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ocupacoes'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - ocupacoes
+      summary: Rota para atualizar uma ocupação.
+      description: Rota para atualizar uma ocupação.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da ocupação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      ocupacoes:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ocupacoes'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ocupacoes'
+    delete:
+      tags:
+        - ocupacoes
+      summary: Rota para deletar uma ocupação.
+      description: Rota para deletar uma ocupação.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: id da ocupação a deletar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /sexo/:
+    get:
+      tags:
+        - sexo
+      summary: Rota para obter todos os sexos.
+      description: Rota para obter todos os sexos.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      sexo:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Sexo'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - sexo
+      summary: Rota para inserir um sexo.
+      description: Rota para inserir um sexo.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      sexo:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Sexo'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sexo'
+  /sexo/:id:
+    get:
+      tags:
+        - sexo
+      summary: Rota para obter um sexo pelo id.
+      description: Rota para obter um sexo pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do sexo a obter.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      sexo:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Sexo'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - sexo
+      summary: Rota para atualizar um sexo.
+      description: Rota para atualizar um sexo.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do sexo a atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      sexo:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Sexo'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sexo'
+    delete:
+      tags:
+        - sexo
+      summary: Rota para deletar um sexo.
+      description: Rota para deletar um sexo.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do sexo a deletar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /setor/:
+    get:
+      tags:
+        - setor
+      summary: Rota para obter todos os setores.
+      description: Rota para obter todos os setores.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      setor:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Setor'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - setor
+      summary: Rota para inserir um novo setor.
+      description: Rota para inserir um novo setor.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      setor:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Setor'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Setor'
+  /setor/:id:
+    get:
+      tags:
+        - setor
+      summary: Rota para obter um setor filtrando pelo id.
+      description: Rota para obter um setor filtrando pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do setor a buscar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      setor:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Setor'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - setor
+      summary: Rota para atualizar um setor.
+      description: Rota para atualizar um setor.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do setor a atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      setor:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Setor'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Setor'
+    delete:
+      tags:
+        - setor
+      summary: Rota para deletar um setor.
+      description: Rota para deletar um setor.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do setor a deletar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /personagem/:
+    get:
+      tags:
+        - personagem
+      summary: Rota para obter todos os personagens.
+      description: Rota para obter todos os personagens.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      personagem:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Personagem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - personagem
+      summary: Rota para criar um personagem
+      description: Rota para criar um personagem
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      personagem:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Personagem'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Personagem'
+  /personagem/:id:
+    get:
+      tags:
+        - personagem
+      summary: Rota para obter um personagem pelo id.
+      description: Rota para obter um personagem pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do personagem a obter.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      personagem:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Personagem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - personagem
+      summary: Rota para atualizar um personagem
+      description: Rota para atualizar um personagem
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do personagem a atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      personagem:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Personagem'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Personagem'
+    delete:
+      tags:
+        - personagem
+      summary: Rota do personagem a deletar
+      description: Rota do personagem a deletar
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /premio/:
+    get:
+      tags:
+        - premio
+      summary: Rota para obter todos os premios.
+      description: Rota para obter todos os premios.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      premio:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Premio'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - premio
+      summary: Rota para inserir um premio.
+      description: Rota para inserir um premio.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      premio:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Premio'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Premio'
+  /premio/:id:
+    get:
+      tags:
+        - premio
+      summary: Rota para procurar um premio pelo id.
+      description: Rota para procurar um premio pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do premio a encontrar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      premio:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Premio'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - premio
+      summary: Rota para atualizar um premio.
+      description: Rota para atualizar um premio.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do premio a atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      premio:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Premio'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Premio'
+    delete:
+      tags:
+        - premio
+      summary: Rota para deletar um premio.
+      description: Rota para deletar um premio.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do premio a deletar
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /curiosidades/:
+    get:
+      tags:
+        - curiosidades
+      summary: Rota para obter todas as curiosidades.
+      description: Rota para obter todas as curiosidades.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      curiosidades:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/curiosidades'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - curiosidades
+      summary: Rota para criar uma curiosidade.
+      description: Rota para criar uma curiosidade.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      curiosidades:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/curiosidades'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/curiosidades'
+  /curiosidades/:id:
+    get:
+      tags:
+        - curiosidades
+      summary: Rota para obter uma curiosidade pelo id.
+      description: Rota para obter uma curiosidade pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da curiosidade.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      curiosidades:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/curiosidades'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - curiosidades
+      summary: Rota para atualizar uma curiosidade.
+      description: Rota para atualizar uma curiosidade.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da curiosidade para atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      curiosidades:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/curiosidades'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/curiosidades'
+    delete:
+      tags:
+        - curiosidades
+      summary: Rota para deletar uma curiosidade.
+      description: Rota para deletar uma curiosidade.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da curiosidade a deletar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /classificacao/:
+    get:
+      tags:
+        - classificacao
+      summary: Rota para obter todas as classificações.
+      description: Rota para obter todas as classificações.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      classificacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/classificacao'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - classificacao
+      summary: Rota para inserir uma classificação
+      description: Rota para inserir uma classificação
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      classificacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/classificacao'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/classificacao'
+  /classificacao/:id:
+    get:
+      tags:
+        - classificacao
+      summary: Rota para obter uma classificação pelo id.
+      description: Rota para obter uma classificação pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da classificação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      classificacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/classificacao'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - classificacao
+      summary: Rota para atualizar uma classificação.
+      description: Rota para atualizar uma classificação.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da classificação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      classificacao:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/classificacao'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/classificacao'
+    delete:
+      tags:
+        - classificacao
+      summary: Rota para deletar uma classificação.
+      description: Rota para deletar uma classificação.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da classificação.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /genero/:
+    get:
+      tags:
+        - genero
+      summary: Rota para obter todos os generos.
+      description: Rota para obter todos os generos.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      genero:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Genero'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - genero
+      summary: Rota para inserir um genero.
+      description: Rota para inserir um genero.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      genero:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Genero'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Genero'
+  /genero/:id:
+    get:
+      tags:
+        - genero
+      summary: Rota para obter um genero pelo id.
+      description: Rota para obter um genero pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do genero.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      genero:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Genero'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - genero
+      summary: Rota para atualizar um genero.
+      description: Rota para atualizar um genero.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do genero.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      genero:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Genero'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Genero'
+    delete:
+      tags:
+        - genero
+      summary: Rota para deletar um genero.
+      description: Rota para deletar um genero.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do genero a deletar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /pais/:
+    get:
+      tags:
+        - pais
+      summary: Rota para obter todos os paises.
+      description: Rota para obter todos os paises.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      pais:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/pais'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - pais
+      summary: Rota para criar um pais.
+      description: Rota para criar um pais.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      pais:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/pais'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pais'
+  /pais/:id:
+    get:
+      tags:
+        - pais
+      summary: Rota para obter um pais pelo id.
+      description: Rota para obter um pais pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: id do pais.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      pais:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/pais'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - pais
+      summary: Rota para atualizar um pais.
+      description: Rota para atualizar um pais.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do pais para atualizar.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      pais:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/pais'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pais'
+    delete:
+      tags:
+        - pais
+      summary: Rota para deletar um pais.
+      description: Rota para deletar um pais.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do pais.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /produtora/:
+    get:
+      tags:
+        - produtora
+      summary: Rota para obter todas as produtoras.
+      description: Rota para obter todas as produtoras.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      produtora:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/produtora'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - produtora
+      summary: Rota para inserir uma produtora.
+      description: Rota para inserir uma produtora.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      produtora:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/produtora'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/produtora'
+  /produtora/:id:
+    get:
+      tags:
+        - produtora
+      summary: Rota para obter uma produtora pelo id.
+      description: Rota para obter uma produtora pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da produtora.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      produtora:
+                        $ref: '#/components/schemas/produtora'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - produtora
+      summary: Rota para atualizar uma produtora.
+      description: Rota para atualizar uma produtora.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da produtora.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      produtora:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/produtora'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/produtora'
+    delete:
+      tags:
+        - produtora
+      summary: Rota para deletar uma produtora.
+      description: Rota para deletar uma produtora.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id da produtora.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /statusFilme/:
+    get:
+      tags:
+        - status_filme
+      summary: Rota para obter todos os status de filmes.
+      description: Rota para obter todos os status de filmes.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      status_filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/status_filme'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - status_filme
+      summary: Rota para inserir um status de filme.
+      description: Rota para inserir um status de filme.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      status_filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/status_filme'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/status_filme'
+  /statusFilme/:id:
+    get:
+      tags:
+        - status_filme
+      summary: Rota para obter um status de filme pelo id.
+      description: Rota para obter um status de filme pelo id.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do status.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      status_filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/status_filme'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    put:
+      tags:
+        - status_filme
+      summary: Rota para atualizar um status de filme.
+      description: Rota para atualizar um status de filme.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do status de filme.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      status_filme:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/status_filme'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/status_filme'
+    delete:
+      tags:
+        - status_filme
+      summary: Rota para deletar um status de filme.
+      description: Rota para deletar um status de filme.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do status de filme.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+  /tipoImagem/:
+    get:
+      tags:
+        - tipo_imagem
+      summary: Rota para obter todos os tipos de imagem
+      description: Rota para obter todos os tipos de imagem
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      tipo_imagem:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/tipo_imagem'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    post:
+      tags:
+        - tipo_imagem
+      summary: Rota para inserir um tipo de imagem.
+      description: Rota para inserir um tipo de imagem.
+      responses:
+        '201':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 201
+                  response:
+                    type: object
+                    properties:
+                      tipo_imagem:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/tipo_imagem'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tipo_imagem'
+  /tipoImagem/:id:
+    get:
+      tags:
+        - tipo_imagem
+      summary: Rota para obter um tipo de imagem pelo id.
+      description: Rota para obter um tipo de imagem pelo id.
+      responses:
+        '200':
+          description: Success deleted item
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      success_deleted_item:
+                        $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+    put:
+      tags:
+        - tipo_imagem
+      summary: Rota para atualizar um tipo de imagem.
+      description: Rota para atualizar um tipo de imagem.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do tipo de imagem.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      tipo_imagem:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/tipo_imagem'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        '415':
+          description: Contenty Type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+      requestBody:
+        description: JSON contendo os dados do request
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tipo_imagem'
+    delete:
+      tags:
+        - tipo_imagem
+      summary: Rota para deletar um tipo de imagem.
+      description: Rota para deletar um tipo de imagem.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Id do tipo de imagem.
+      responses:
+        '200':
+          description: Operação bem sucedida.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  api_description:
+                    type: string
+                    example: API para controlar o projeto de Filmes 🎥.
+                  development:
+                    type: string
+                    example: Gabriel
+                  version:
+                    type: string
+                    example: 1.0.0
+                  status:
+                    type: boolean
+                    example: true
+                  status_code:
+                    type: integer
+                    example: 200
+                  response:
+                    type: object
+                    properties:
+                      success_deleted_item:
+                        $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_NOT_FOUND'
+        500 (CONTROLLER):
+          description: Internal Server Error CONTROLLER
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+        500 (MODEL):
+          description: Internal Server Error MODEL
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+components:
+  schemas:
+    ERROR_BAD_REQUEST:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: status false
+        status_code:
+          type: integer
+          format: int64
+          description: '400'
+        message:
+          type: string
+          description: Não foi possivel processar a requisição devido a erros de entrada de dados 😣.
+        image:
+          type: string
+          description: https://http.dog/400.jpg
+    SUCCESS_DELETED_ITEM:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: 'true'
+        status_code:
+          type: integer
+          format: int64
+          description: '200'
+        message:
+          type: string
+          description: Item excluido com sucesso 🥳
+        image:
+          type: string
+          description: https://http.dog/200.jpg
+    ERROR_INTERNAL_SERVER_MODEL:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: 'false'
+        status_code:
+          type: integer
+          format: int64
+          description: '500'
+        message:
+          type: string
+          description: Não foi possível processar a requisição devido a um erro interno no servidor. 🤖 [MODEL].
+        image:
+          type: string
+          description: https://http.dog/500.jpg
+    ERROR_INTERNAL_SERVER_CONTROLLER:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: 'false'
+        status_code:
+          type: integer
+          format: int64
+          description: '500'
+        message:
+          type: string
+          description: Não foi possível processar a requisição devido a um erro interno no servidor. 🤖 [CONTROLLER].
+        image:
+          type: string
+          description: https://http.dog/500.jpg
+    ERROR_CONTENT_TYPE:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: 'false'
+        status_code:
+          type: integer
+          format: int64
+          description: '415'
+        message:
+          type: string
+          description: Não foi possível processar a requisição, pois o formato de dados ecaminhado não é suportado pelo servidor, apenas deve ser utilizado JSON. 🤖
+        image:
+          type: string
+          description: https://http.dog/415.jpg
+    ERROR_NOT_FOUND:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: 'false'
+        status_code:
+          type: integer
+          format: int64
+          description: '404'
+        message:
+          type: string
+          description: Não foram encontrados dados para retorno. 🗺️❌
+        image:
+          type: string
+          description: https://http.dog/404.jpg
+    Idiomas:
+      required:
+        - idioma
+        - sigla
+      type: object
+      properties:
+        idioma:
+          type: string
+          description: Nome do idioma a inserir.
+        sigla:
+          type: string
+          description: Sigla do idioma a inserir.
+    Pessoa:
+      required:
+        - nome_nascimento
+        - data_nascimento
+      type: object
+      properties:
+        nome_nascimento:
+          type: string
+          description: Nome da pessoa a inserir.
+        data_nascimento:
+          type: string
+          format: date
+          description: Data de nascimento da pessoa a inserir.
+        data_falecimento:
+          type: string
+          format: date
+          description: Data de falecimento da pessoa a inserir.
+        ano_inicio_carreira:
+          type: integer
+          format: int64
+          description: Ano de inicio de carreira da pessoa a inserir.
+        biografia:
+          type: string
+          description: Biografia da pessoa a inserir.
+        altura:
+          type: number
+          description: Altura da pessoa a inserir.
+        cidade_natal:
+          type: string
+          description: Nome da cidade natal da pessoa a inserir.
+        id_sexo:
+          type: integer
+          format: int64
+          description: Id do sexo da pessoa a inserir.
+        curiosidades:
+          type: array
+          description: Array que guarda ids com curiosidades sobre a pessoa a inserir.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                description: id da curiosidade.
+            required:
+              - id
+        premios:
+          type: array
+          description: Premios recebidos pela pessoa a inserir.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                description: Id do premio recebido.
+            required:
+              - id
+        paises_origem:
+          type: array
+          description: Paises de origem da pessoa a inserir.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                description: Id do pais.
+            required:
+              - id
+        ocupacoes:
+          type: array
+          description: Ocupações profissionais da pessoa a inserir.
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                format: int64
+                description: id da ocupação.
+            required:
+              - id
+        fotos:
+          type: array
+          description: Fotos da pessoa a inserir.
+          items:
+            type: object
+            properties:
+              foto:
+                type: string
+                description: url da foto a inserir.
+            required:
+              - foto
+        nomes_artisticos:
+          type: array
+          description: Nomes artisticos da pessoa a inserir.
+          items:
+            type: object
+            properties:
+              nome:
+                type: string
+                description: Nome artisco da pessoa
+            required:
+              - nome
+    Filme:
+      required:
+        - nome
+        - sinopse
+        - data_lancamento
+        - duracao
+        - bilheteria
+        - id_status
+        - id_classificacao
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome do filme a inserir
+        sinopse:
+          type: string
+          description: Sinopse do filme a inserir.
+        data_lancamento:
+          type: string
+          format: date
+          description: Data de lançamento do filme a inserir.
+        duracao:
+          type: string
+          format: time
+          description: Duração do filme a inserir.
+        bilheteria:
+          type: number
+          description: Bilheteria do filme a inserir.
+        valor:
+          type: number
+          description: Valor do aluguel do filme (caso exista).
+        avaliacao_critica:
+          type: integer
+          format: int64
+          description: Avaliação da critica do filme a inserir.
+        avaliacao:
+          type: integer
+          format: int64
+          description: Avaliação do publico geral do filme.
+        id_status:
+          type: integer
+          format: int64
+          description: id do status do filme.
+        id_classificacao:
+          type: integer
+          format: int64
+          description: id da classificação do filme.
+    tipo_atuacao:
+      required:
+        - tipo
+        - descricao
+      type: object
+      properties:
+        tipo:
+          type: string
+          description: Nome do tipo de atuação feita.
+        descricao:
+          type: string
+          description: Descrição do tipo de atuação.
+    ocupacoes:
+      required:
+        - nome
+        - descricao
+        - id_setor
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome da ocupação
+        descricao:
+          type: string
+          description: Descrição da ocupação.
+        id_setor:
+          type: integer
+          format: int64
+          description: Id do setor que a area pertence.
+    Sexo:
+      required:
+        - sexo
+        - sigla
+      type: object
+      properties:
+        sexo:
+          type: string
+          description: Nome do sexo a inserir.
+        sigla:
+          type: string
+          description: Sigla do sexo a inserir.
+    Setor:
+      required:
+        - nome_setor
+      type: object
+      properties:
+        nome_setor:
+          type: string
+          description: Nome do setor a ser inserido.
+    Personagem:
+      required:
+        - nome
+        - descricao
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome do personagem a inserir.
+        descricao:
+          type: string
+          description: Descrição do personagem a inserir.
+        fotos:
+          type: array
+          description: Fotos do personagem a inserir.
+          items:
+            type: object
+            properties:
+              foto:
+                type: string
+                description: url da foto do personagem.
+            required:
+              - foto
+    Premio:
+      required:
+        - nome
+        - data_ganho
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome do premio
+        data_ganho:
+          type: string
+          format: date
+          description: Data do ganho do premio.
+        descricao:
+          type: string
+          description: Descrição do premio.
+        curiosidades:
+          type: string
+          description: Curiosidades sobre o premio
+    curiosidades:
+      required:
+        - curiosidade
+      type: object
+      properties:
+        curiosidade:
+          type: string
+          description: Texto da curiosidade a inserir.
+    classificacao:
+      required:
+        - classificacao
+        - informacao_classificacao
+      type: object
+      properties:
+        classificacao:
+          type: integer
+          format: int64
+          description: Idade da classificação indicativa.
+        informacao_classificacao:
+          type: string
+          description: Detalhes da classificação indicativa.
+    Genero:
+      required:
+        - genero
+      type: object
+      properties:
+        genero:
+          type: string
+          description: Nome do genero.
+    pais:
+      required:
+        - pais
+      type: object
+      properties:
+        pais:
+          type: string
+          description: Nome do pais.
+    produtora:
+      required:
+        - nome
+      type: object
+      properties:
+        nome:
+          type: string
+          description: Nome da produtora.
+    status_filme:
+      required:
+        - status
+      type: object
+      properties:
+        status:
+          type: string
+          description: Nome do status atual do filme.
+    tipo_imagem:
+      type: object
+      properties:
+        tipo:
+          type: string
+          description: Tipo da imagem.
+  requestBodies:
+    ERROR_BAD_REQUEST:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ERROR_BAD_REQUEST'
+    SUCCESS_DELETED_ITEM:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SUCCESS_DELETED_ITEM'
+    ERROR_INTERNAL_SERVER_MODEL:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_MODEL'
+    ERROR_INTERNAL_SERVER_CONTROLLER:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ERROR_INTERNAL_SERVER_CONTROLLER'
+    ERROR_CONTENT_TYPE:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ERROR_CONTENT_TYPE'
+    ERROR_NOT_FOUND:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ERROR_NOT_FOUND'
+    Idiomas:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Idiomas'
+    Pessoa:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pessoa'
+    Filme:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Filme'
+    tipo_atuacao:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/tipo_atuacao'
+    ocupacoes:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ocupacoes'
+    Sexo:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Sexo'
+    Setor:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Setor'
+    Personagem:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Personagem'
+    Premio:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Premio'
+    curiosidades:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/curiosidades'
+    classificacao:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/classificacao'
+    Genero:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Genero'
+    pais:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/pais'
+    produtora:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/produtora'
+    status_filme:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/status_filme'
+    tipo_imagem:
+      description: Objeto enviado no Body da requisição
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/tipo_imagem'

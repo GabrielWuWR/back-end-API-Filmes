@@ -60,7 +60,7 @@ const getAllProdutora = async function () {
 
 const getProdutoraById = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_produtora', id);
+        let sql = criarSql.SELECT('tbl_produtora', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -77,7 +77,7 @@ const getProdutoraById = async function (id) {
 
 const deleteProdutora = async function (id) {
     try {
-        let sql = criarSql.DELETE('tbl_produtora', id);
+        let sql = criarSql.DELETE('tbl_produtora', 'id', id);
 
         let result = await knexConection.raw(sql);
 

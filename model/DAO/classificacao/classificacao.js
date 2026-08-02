@@ -69,7 +69,7 @@ const selectAllClassificacao = async function () {
 
 const selectByIdClassificacao = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_classificacao', id);
+        let sql = criarSql.SELECT('tbl_classificacao', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -85,7 +85,7 @@ const selectByIdClassificacao = async function (id) {
 
 const deleteClassificacao = async function (id) {
     try {
-        let sql = criarSql.DELETE('tbl_classificacao', id);
+        let sql = criarSql.DELETE('tbl_classificacao', 'id', id);
         
         let result = knexConection.raw(sql);
 

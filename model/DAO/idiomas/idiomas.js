@@ -62,7 +62,7 @@ const getAllIdioma = async function () {
 
 const getIdiomaById = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_idiomas', id);
+        let sql = criarSql.SELECT('tbl_idiomas', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -78,7 +78,7 @@ const getIdiomaById = async function (id) {
 
 const deleteIdioma = async function (id) {
     try {
-        let sql = criarSql.DELETE('tbl_idiomas', id);
+        let sql = criarSql.DELETE('tbl_idiomas', 'id', id);
 
         let result = await knexConection.raw(sql);
 

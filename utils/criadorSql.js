@@ -27,13 +27,12 @@ const criarSql = {
 
             campos.push(campo); //Adicionando o campo ao array de campos
 
-            //Antes de adicionar o valor precisamos ver se ele tem algum criterio especial
-            //No caso estamos vendo se o campo atual está no json de campos especiais se estiver nos queremos saber se
-            //ele tem o campo vazioNull true
-            if (camposEspeciais[campo] && camposEspeciais[campo].vazioNull == true) {
-                valores.push(`if('${valor}' = '', null, '${valor}')`);
+            if (valor === null || valor === undefined) {
+                valores.push('NULL');
+            } else if (camposEspeciais[campo] && camposEspeciais[campo].vazioNull == true && valor === '') {
+                valores.push('NULL');
             } else {
-                valores.push(`'${valor}'`); //Caso não tenha campo especial nenhum só colocamos ele no array normalmente
+                valores.push(`'${valor}'`);
             }
         }
 
@@ -67,8 +66,10 @@ const criarSql = {
             let valor = dados[campo];
             let valorFormatado;
 
-            if (camposEspeciais && camposEspeciais[campo] && camposEspeciais[campo].vazioNull === true) {
-                valorFormatado = `if('${valor}' = '', null, '${valor}')`;
+            if (valor === null || valor === undefined) {
+                valorFormatado = 'NULL';
+            } else if (camposEspeciais[campo] && camposEspeciais[campo].vazioNull === true && valor === '') {
+                valorFormatado = 'NULL';
             } else {
                 valorFormatado = `'${valor}'`;
             }
@@ -87,18 +88,19 @@ const criarSql = {
 
     /**
      * Função responsável por montar um comando de SELECT.
-     * Pode criar selecs com ou sem where.
-     * * @param {string} nomeTabela - O nome da tabela que será procurada.
-     * @param {number|string|null} [id=null] - (Opcional) caso inserido ele gera um select com where.
-     * @returns {string} - Retorna o comando de sql pronto.
+     * Pode criar selects com ou sem where.
+     * @param {string} nomeTabela - O nome da tabela que será consultada.
+     * @param {string} nomeCampo - O nome da coluna usada como condição no where.
+     * @param {number|string|null} [campo=null] - (Opcional) O valor a ser buscado. Caso seja null, gera um select sem where.
+     * @returns {string} - Retorna o comando sql pronto.
      */
-    SELECT(nomeTabela, id) {
+    SELECT(nomeTabela, nomeCampo, campo) {
         let sql = null;
 
-        if (id == null) {
+        if (campo == null) {
             sql = `select * from ${nomeTabela} order by id desc;`
         } else {
-            sql = `select * from ${nomeTabela} where id = ${id};`
+            sql = `select * from ${nomeTabela} where ${nomeCampo} = '${campo}';`
         }
 
         return sql;
@@ -106,12 +108,13 @@ const criarSql = {
 
     /**
      * Função responsável por montar um comando de DELETE.
-     * * @param {string} nomeTabela - O nome da tabela que o registro será apagado.
-     * @param {number|string} id - Id do item a excluir.
-     * @returns {string} - Retorna o comando de sql pronto.
+     * @param {string} nomeTabela - O nome da tabela de onde o registro será apagado.
+     * @param {string} campoNome - O nome da coluna usada como condição para a exclusão.
+     * @param {number|string} campoValor - O valor da condição para a exclusão do registro.
+     * @returns {string} - Retorna o comando sql pronto.
      */
-    DELETE(nomeTabela, id) {
-        let sql = `delete from ${nomeTabela} where id = ${id};`;
+    DELETE(nomeTabela, campoNome, campoValor) {
+        let sql = `delete from ${nomeTabela} where ${campoNome} = ${campoValor};`;
 
         return sql;
     }

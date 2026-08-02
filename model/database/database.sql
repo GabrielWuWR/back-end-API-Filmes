@@ -1,6 +1,6 @@
 #Criando e acessando o DataBase
-create database db_super_filmes;
-use db_super_filmes;
+create database db_filmes_20261_b;
+use db_filmes_20261_b;
 
 #Criando a tabela de status
 create table tbl_status_filme (

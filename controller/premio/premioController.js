@@ -7,7 +7,7 @@ const { tratar } = require('../../utils/tratamento.js');
 
 const regras = {
     nome: { necessario: true, minimo: 1, maximo: 30, tipo: "string" },
-    data: { necessario: true, minimo: 10, maximo: 10, tipo: "data" },
+    data_ganho: { necessario: true, minimo: 10, maximo: 10, tipo: "data" },
     descricao: { necessario: false, tipo: "string" },
     curiosidades: { necessario: false, tipo: "string" }
 };

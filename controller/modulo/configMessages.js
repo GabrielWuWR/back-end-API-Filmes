@@ -3,14 +3,14 @@
  *           do projeto de filmes.
  * Data: 17/04/2026
  * Autor: Gabriel
- * Versão: 1.0.17.4
+ * Versão: 1.0.0
  **********************************************************************************************/
 
 //Padronização dos retornos da API
 const DEFAULT_MESSAGE = {
     api_description: 'API para controlar o projeto de Filmes 🎥.',
     development: 'Gabriel',
-    version: '1.0.17.4',
+    version: '1.0.0',
     status: false,
     status_code: 0,
     response: {}
@@ -30,6 +30,13 @@ const SUCESS_CREATE_ITEM = {
     image: 'https://http.dog/201.jpg',
 };
 
+const SUCCESS_CREATED_ITEM_WARNING = {
+    status: true,
+    status_code: 201,
+    message: 'Item inserido com sucesso, porém alguns dados não foram processados 😣.',
+    image: 'https://http.dog/201.jpg',
+};
+
 const SUCCESS_RESPONSE = {
     status: true,
     status_code: 200,
@@ -40,6 +47,13 @@ const SUCCESS_UPDATE_ITEM = {
     status: true,
     status_code: 200,
     message: 'Item atualizado com sucesso 🥳',
+    image: 'https://http.dog/200.jpg'
+};
+
+const SUCCESS_UPDATE_ITEM_WARNING = {
+    status: true,
+    status_code: 200,
+    message: 'Item atualizado com sucesso, porém alguns dados não foram processados 😣.',
     image: 'https://http.dog/200.jpg'
 };
 
@@ -106,6 +120,31 @@ const mensagem = {
     },
 
     /**
+        * Retorna o status 201 com aviso.
+        * Utilizado quando o item principal é inserido, mas alguns dados falharam.
+        * 
+        * @param {Object} response - Objeto contendo os dados do item criado.
+        * @param {Array} [avisos=[]] - Lista de avisos ou erros ocorridos durante o processamento.
+        * @returns {Object} JSON de resposta.
+    */
+    SUCESSO_CRIAR_ITEM_AVISO(response, avisos = []) {
+        let baseMessage = structuredClone(DEFAULT_MESSAGE);
+        let message = structuredClone(SUCCESS_CREATED_ITEM_WARNING);
+
+        baseMessage.status = message.status;
+        baseMessage.status_code = message.status_code;
+        baseMessage.message = message.message;
+        baseMessage.response = response;
+        baseMessage.image = message.image;
+
+        if (avisos.length > 0) {
+            baseMessage.warnings = avisos;
+        }
+
+        return baseMessage;
+    },
+
+    /**
      * Retorna o status 200. 
      * Utilizado quando os dados de um item são atualizados com sucesso.
      * @param {Object} response - Objeto contendo os dados atualizados.
@@ -120,6 +159,30 @@ const mensagem = {
         baseMessage.message = message.message;
         baseMessage.response = response;
         baseMessage.image = message.image;
+
+        return baseMessage;
+    },
+
+    /**
+     * Retorna o status 200 com aviso.
+     * Utilizado quando o item principal é atualizado, mas algumas tabelas auxiliares falharam.
+     * * @param {Object} response - Objeto contendo os dados do item atualizado.
+     * @param {Array} [avisos=[]] - Lista de avisos ou erros ocorridos durante o processamento.
+     * @returns {Object} JSON de resposta.
+     */
+    SUCESSO_ATUALIZAR_ITEM_AVISO(response, avisos = []) {
+        let baseMessage = structuredClone(DEFAULT_MESSAGE);
+        let message = structuredClone(SUCCESS_UPDATE_ITEM_WARNING);
+
+        baseMessage.status = message.status;
+        baseMessage.status_code = message.status_code;
+        baseMessage.message = message.message;
+        baseMessage.response = response;
+        baseMessage.image = message.image;
+
+        if (avisos.length > 0) {
+            baseMessage.warnings = avisos;
+        }
 
         return baseMessage;
     },
@@ -150,7 +213,7 @@ const mensagem = {
         baseMessage.image = message.image;
 
         if (Array.isArray(result)) {
-            if(result.length !== 1) {
+            if (result.length !== 1) {
                 baseMessage.response.count = result.length;
             }
         }

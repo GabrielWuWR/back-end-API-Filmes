@@ -18,6 +18,7 @@ const insertPremio = async function (premio) {
         }
 
     } catch (error) {
+        console.log(error)
         return false;
     }
 };
@@ -57,7 +58,7 @@ const selectAllPremio = async function () {
 
 const selectByIdPremio = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_premio', id);
+        let sql = criarSql.SELECT('tbl_premio', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -74,7 +75,7 @@ const selectByIdPremio = async function (id) {
 
 const deletePremio = async function (id) {
     try {
-        let sql = criarSql.DELETE('tbl_premio', id);
+        let sql = criarSql.DELETE('tbl_premio', 'id', id);
 
         let result = await knexConection.raw(sql);
 

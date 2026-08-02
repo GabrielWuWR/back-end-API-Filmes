@@ -63,7 +63,7 @@ const selectAllGenero = async function () {
 
 const selectByIdGenero = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_genero', id);
+        let sql = criarSql.SELECT('tbl_genero', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -80,7 +80,7 @@ const selectByIdGenero = async function (id) {
 
 const deleteGenero = async function (id) {
     try {
-        let sql = criarSql.DELETE('tbl_genero', id);
+        let sql = criarSql.DELETE('tbl_genero', 'id', id);
 
         let result = knexConection.raw(sql);
 

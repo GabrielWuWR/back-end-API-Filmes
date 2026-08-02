@@ -1,19 +1,33 @@
 const tratar = {
     /**
-     * Função para tratar os dados.
-     * 
-     * @param {Object} dados - O objeto contendo os dados a serem tratados.
-     * @returns {Object} - O objeto com os textos tratados.
+     * Trata os dados e mantém apenas os campos permitidos.
+     *
+     * @param {Object} dados
+     * @param {Array<string>} camposPermitidos
+     * @returns {Object}
      */
-    DADOS: function (dados) {
-        for (let campo in dados) {
+    DADOS: function (dados, camposPermitidos = null) {
 
-            if (typeof dados[campo] === 'string') {
-                dados[campo] = dados[campo].replaceAll("'", "’");
+        let novoObjeto = {};
+
+        for (let campo in dados) {
+            if (
+                camposPermitidos &&
+                !camposPermitidos.includes(campo)
+            ) {
+                continue;
             }
+
+            let valor = dados[campo];
+
+            if (typeof valor === "string") {
+                valor = valor.replaceAll("'", "’");
+            }
+
+            novoObjeto[campo] = valor;
         }
 
-        return dados;
+        return novoObjeto;
     }
 };
 

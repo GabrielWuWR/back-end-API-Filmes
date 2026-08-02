@@ -65,7 +65,7 @@ const getAllPais = async function () {
 
 const getPaisById = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_pais', id);
+        let sql = criarSql.SELECT('tbl_pais', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -81,7 +81,7 @@ const getPaisById = async function (id) {
 
 const deletePais = async function (id) {
     try {
-        let sql = criarSql.DELETE('tbl_pais', id);
+        let sql = criarSql.DELETE('tbl_pais', 'id', id);
 
         let result = await knexConection.raw(sql);
 

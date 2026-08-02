@@ -62,7 +62,7 @@ const getAllTipoImagem = async function () {
 
 const getTipoImagemById = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_tipo_imagem', id);
+        let sql = criarSql.SELECT('tbl_tipo_imagem', 'id', id);
 
         let result = await knexConection.raw(sql);
 
@@ -79,7 +79,7 @@ const getTipoImagemById = async function (id) {
 
 const deleteTipoImagem = async function (id) {
     try {
-        let sql = criarSql.SELECT('tbl_tipo_imagem', id);
+        let sql = criarSql.SELECT('tbl_tipo_imagem', 'id', id);
 
         let result = await knexConection.raw(sql);
 
